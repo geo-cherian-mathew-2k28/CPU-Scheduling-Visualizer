@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Visualizer | Interactive Simulator</title>
+    <meta name="description"
+        content="A premium, interactive web-based CPU scheduling simulator for FCFS, SJF, and Priority algorithms. Visualize execution with dynamic Gantt charts and calculate metrics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1 class="glass-text">CPU Scheduling Visualizer</h1>
+            <p class="subtitle">Simulate and visualize process scheduling algorithms with ease.</p>
+        </header>
+
+        <section class="config-section">
+            <div class="glass-card">
+                <h2>Algorithm Settings</h2>
+                <div class="control-group">
+                    <label for="algo-select">Select Algorithm</label>
+                    <select id="algo-select">
+                        <option value="FCFS">First Come First Serve (FCFS)</option>
+                        <option value="SJF">Shortest Job First (SJF - Non Preemptive)</option>
+                        <option value="Priority">Priority Scheduling (Non Preemptive)</option>
+                    </select>
+                </div>
+                <div class="theory-note" id="theory-note">
+                    <!-- Theory requirement will be injected here -->
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h2>Add Process</h2>
+                <form id="process-form" class="process-inputs">
+                    <div class="input-field">
+                        <label for="arrival-time">Arrival Time</label>
+                        <input type="number" id="arrival-time" min="0" placeholder="e.g. 0" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="burst-time">Burst Time</label>
+                        <input type="number" id="burst-time" min="1" placeholder="e.g. 5" required>
+                    </div>
+                    <div class="input-field" id="priority-field" style="display: none;">
+                        <label for="priority">Priority</label>
+                        <input type="number" id="priority" min="1" placeholder="Lesser = Higher" value="1">
+                    </div>
+                    <button type="submit" id="add-btn" class="btn primary-btn">Add Process</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="process-list-section">
+            <div class="glass-card">
+                <div class="section-header">
+                    <h2>Input Processes</h2>
+                    <div class="action-buttons">
+                        <button id="sample-btn" class="btn primary-btn"
+                            style="background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);">Load Sample</button>
+                        <button id="simulate-btn" class="btn success-btn">Simulate</button>
+                        <button id="reset-btn" class="btn danger-btn">Reset</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="input-table">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Arrival Time</th>
+                                <th>Burst Time</th>
+                                <th class="priority-col" style="display: none;">Priority</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="input-tbody">
+                            <!-- Rows will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="visualization-section" class="visualization-section" style="display: none;">
+            <div class="glass-card">
+                <h2>Gantt Chart</h2>
+                <div id="gantt-chart" class="gantt-container">
+                    <!-- Gantt blocks will be injected here -->
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h2>Simulation Results</h2>
+                <div class="table-container">
+                    <table id="result-table">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th class="priority-col" style="display: none;">Priority</th>
+                                <th>Completion</th>
+                                <th>Turnaround</th>
+                                <th>Waiting</th>
+                            </tr>
+                        </thead>
+                        <tbody id="result-tbody">
+                            <!-- Results will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="metrics-footer">
+                    <div class="metric-item">
+                        <span class="label">Average Waiting Time:</span>
+                        <span id="avg-waiting-time" class="value">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="label">Average Turnaround Time:</span>
+                        <span id="avg-turnaround-time" class="value">0.00</span>
+                    </div>
+                </div>
+
+                <div id="simulation-analysis" class="theory-note" style="margin-top: 30px; display: none;">
+                    <!-- Specific simulation analysis will be injected here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
